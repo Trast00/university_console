@@ -1,4 +1,4 @@
-require './Nameable.rb'
+require './Nameable'
 
 class Person < Nameable
   attr_reader :id
@@ -9,19 +9,20 @@ class Person < Nameable
     @age = age
     @name = name
     @parent_permission = parent_permission
+    super()
   end
 
   def can_use_services?
     of_age? || @parent_permission
   end
 
+  def correct_name
+    @name
+  end
+
   private
 
   def of_age?
     @age >= 18
-  end
-
-  def correct_name
-    @name
   end
 end

@@ -1,6 +1,6 @@
-require './correct_namable.rb'
-class Capitalizedecorator < CorrectNameable
+require './correct_nameable'
+class CapitalizeDecorator < CorrectNameable
   def correct_name
-    `capitalized #{@person.correct_namable}`
+    @person.correct_name.upcase
   end
 end
