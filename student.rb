@@ -1,8 +1,12 @@
 require './person'
+require './classroom'
 
 class Student < Person
+  attr_accessor :classroom
+
   def initialize(classroom, age, name = 'Unknow', parent_permission: false)
     super(age, name, parent_permission: parent_permission)
+    classroom.list_student << self
     @classroom = classroom
   end
 
@@ -10,5 +14,10 @@ class Student < Person
     '¯(ツ)/¯'
   end
 
-  attr_accessor :classroom
+  def change_classroom(new_classroom)
+    @classroom.list_student.delete(self) if @classroom.list_student.include?(self)
+
+    new_classroom.list_student << self
+    @classroom = new_classroom
+  end
 end

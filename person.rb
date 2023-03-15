@@ -2,13 +2,14 @@ require './Nameable'
 
 class Person < Nameable
   attr_reader :id
-  attr_accessor :name, :age
+  attr_accessor :name, :age, :list_rental
 
   def initialize(age, name = 'Unknown', parent_permission: false)
     @id = rand(999)
     @age = age
     @name = name
     @parent_permission = parent_permission
+    @list_rental = []
     super()
   end
 
@@ -18,6 +19,10 @@ class Person < Nameable
 
   def correct_name
     @name
+  end
+
+  def add_rental(rental)
+    @list_rental << rental unless list_rental.include?(rental)
   end
 
   private
