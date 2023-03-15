@@ -15,10 +15,9 @@ class Student < Person
   end
 
   def change_classroom(new_classroom)
-    @classroom.list_student.delete(self)  if @classroom.list_student.include?(self)
-    
+    @classroom.list_student.delete(self) if @classroom.list_student.include?(self)
+
     new_classroom.list_student << self
     @classroom = new_classroom
   end
-
 end
