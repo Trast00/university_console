@@ -25,7 +25,6 @@ class Person < Nameable
     @list_rental << rental unless list_rental.include?(rental)
   end
 
-
   private
 
   def of_age?
