@@ -1,8 +1,10 @@
 #!C:/Ruby31-x64/bin/ruby.exe
 require './student.rb'
 require './teacher.rb'
+require './book.rb'
 
 @list_person = []
+@list_book = []
 
 def get_input(message, type, between_values=[])
   data = ""
@@ -15,8 +17,12 @@ def get_input(message, type, between_values=[])
   data
 end
 
-def listAllBook
-  puts "All book listed"
+def create_book
+  puts "Information of the new book"
+  title = get_input("Title: ", String)
+  author = get_input("Author: ", String)
+  @list_book << Book.new(title, author)
+  puts "Book created successfully"
 end
 
 def create_person
