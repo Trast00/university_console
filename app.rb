@@ -2,9 +2,11 @@
 require './student.rb'
 require './teacher.rb'
 require './book.rb'
+require './rental.rb'
 
 @list_person = []
 @list_book = []
+@list_rental = []
 
 def get_input(message, type, between_values=[])
   data = ""
@@ -35,8 +37,17 @@ def show_list_person(with_index: false)
 end
 
 def create_rental
-  puts "Select a book from the following list by number"
-  puts "Select a person from the following list by number (not id)"
+  puts "Select a book from the following list by number: "
+  show_list_book(with_index: true)
+  book_index = get_input("", Integer)
+  
+  puts "Select a person from the following list by number (not id):"
+  show_list_person(with_index: true)
+  person_index = get_input("", Integer)
+
+  date = get_input("Date: ", String)
+  @list_rental << Rental.new(date, @list_person[person_index], @list_book[book_index])
+  puts "Rental successfully created"
 end
 
 def create_book
