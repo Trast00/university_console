@@ -17,6 +17,24 @@ def get_input(message, type, between_values=[])
   data
 end
 
+def show_book(book)
+  "Title: #{book.title}, Author: #{book.author}"
+end
+
+def show_list_person(with_index: false)
+  return puts "List person empty" if @list_person.empty?
+  @list_person.each_with_index do |person, index| 
+    status = (person.is_a?(Student) ? "[Student]": "[Teacher]")
+    print "#{index})" if with_index
+    puts "#{status} Name: #{person.name}, ID: #{person.id}, Age: #{person.age}"
+  end
+end
+
+def create_rental
+  puts "Select a book from the following list by number"
+  puts "Select a person from the following list by number (not id)"
+end
+
 def create_book
   puts "Information of the new book"
   title = get_input("Title: ", String)
@@ -46,8 +64,8 @@ end
 
 def open_option(optionNumber)
   case optionNumber
-  when 1 then list_all_Book
-  when 2 then list_all_person
+  when 1 then show_list_book
+  when 2 then show_list_person
   when 3 then create_person
   when 4 then create_book
   when 5 then create_rental
