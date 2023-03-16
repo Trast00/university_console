@@ -17,15 +17,19 @@ def get_input(message, type, between_values=[])
   data
 end
 
-def show_book(book)
-  "Title: #{book.title}, Author: #{book.author}"
+def show_list_book(with_index: false)
+  return puts "List book empty" if @list_book.empty?
+  @list_book.each_with_index do |book, index|
+    print "#{index}) " if with_index
+    puts "Title: #{book.title}, Author: #{book.author}"
+  end
 end
 
 def show_list_person(with_index: false)
   return puts "List person empty" if @list_person.empty?
   @list_person.each_with_index do |person, index| 
     status = (person.is_a?(Student) ? "[Student]": "[Teacher]")
-    print "#{index})" if with_index
+    print "#{index}) " if with_index
     puts "#{status} Name: #{person.name}, ID: #{person.id}, Age: #{person.age}"
   end
 end
