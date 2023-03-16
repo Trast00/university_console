@@ -6,7 +6,6 @@ require './rental.rb'
 
 @list_person = []
 @list_book = []
-@list_rental = []
 
 def get_input(message, type, between_values=[])
   data = ""
@@ -36,17 +35,35 @@ def show_list_person(with_index: false)
   end
 end
 
+def show_rental_by_id
+  person_id = get_input("ID of person: ", Integer)
+  person = @list_person.select {|person| person.id == person_id}
+  return print "This person ID do not exist" if person
+
+  puts "Rentals"
+  person.list_rental.each |rental| do
+    puts "Date: #{rental.date}, Book: #{rental.book.title} by #{rental.book.author}"
+  end
+end
+
 def create_rental
   puts "Select a book from the following list by number: "
   show_list_book(with_index: true)
   book_index = get_input("", Integer)
+  return print "Bad value for book id" if !@list_person[person_index]
   
   puts "Select a person from the following list by number (not id):"
   show_list_person(with_index: true)
   person_index = get_input("", Integer)
-
+  return print "Bad value for person id" if !@list_person[person_index]
+  
   date = get_input("Date: ", String)
-  @list_rental << Rental.new(date, @list_person[person_index], @list_book[book_index])
+
+  rental = Rental.new(date, @list_person[person_index], @list_book[book_index])
+
+  @list_person[person_index].list_rental << rental
+  @list_book[book_index].list_rental << rental
+
   puts "Rental successfully created"
 end
 
@@ -84,7 +101,7 @@ def open_option(optionNumber)
   when 3 then create_person
   when 4 then create_book
   when 5 then create_rental
-  when 6 then list_all_rental_by_id
+  when 6 then show_rental_by_id
   end
 end
 
