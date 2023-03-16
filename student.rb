@@ -4,9 +4,9 @@ require './classroom'
 class Student < Person
   attr_accessor :classroom
 
-  def initialize(age, name = 'Unknow', parent_permission: false, classroom = "Unknow")
+  def initialize(age, name = 'Unknow', classroom = nil, parent_permission: false)
     super(age, name, parent_permission: parent_permission)
-    classroom.list_student << self
+    classroom.list_student << self if classroom
     @classroom = classroom
   end
 
