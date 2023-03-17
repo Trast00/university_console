@@ -1,4 +1,3 @@
-#!C:/Ruby31-x64/bin/ruby.exe
 require './student'
 require './teacher'
 require './book'
