@@ -92,6 +92,11 @@ To run the project, execute the following command:
 - Twitter: [@twitterhandle](https://twitter.com/AllassaneDicko0/)
 - LinkedIn: [LinkedIn](https://www.linkedin.com/in/allassane-dicko-744aaa224)
 
+👤 **Steven Mukama**
+
+- GitHub: [@stevenmukama](https://github.com/stevenmukama)
+- Twitter: [@mukama_steven](https://mobile.twitter.com/mukama_steven)
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- FUTURE FEATURES -->
