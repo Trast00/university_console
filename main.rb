@@ -4,24 +4,6 @@ require './teacher'
 require './book'
 require './rental'
 
-@list_book = []
-def show_list_book(with_index: false)
-  return puts 'List book empty' if @list_book.empty?
-
-  @list_book.each_with_index do |book, index|
-    print "#{index}) " if with_index
-    puts "Title: #{book.title}, Author: #{book.author}"
-  end
-end
-
-def create_book
-  puts 'Information of the new book'
-  title = get_input('Title: ', String)
-  author = get_input('Author: ', String)
-  @list_book << Book.new(title, author)
-  puts 'Book created successfully'
-end
-
 def open_option(option_number)
   case option_number
   when 1 then show_list_book
