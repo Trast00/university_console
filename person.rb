@@ -31,35 +31,3 @@ class Person < Nameable
     @age >= 18
   end
 end
-
-@list_person = []
-
-def show_list_person(with_index: false)
-  return puts 'List person empty' if @list_person.empty?
-
-  @list_person.each_with_index do |person, index|
-    status = (person.is_a?(Student) ? '[Student]' : '[Teacher]')
-    print "#{index}) " if with_index
-    puts "#{status} Name: #{person.name}, ID: #{person.id}, Age: #{person.age}"
-  end
-end
-
-def create_person
-  print 'Do you want to create studen (1) or a teacher (2)? [Input the number]: '
-  option = gets.chomp.to_i
-
-  return create_person if option != 1 && option != 2
-
-  age = get_input('Age: ', Integer)
-  name = get_input('Name: ', String)
-
-  if option == 1
-    parent_permission = get_input('Parent Persion [Y/N]: ', String, %w[Y N y n])
-    @list_person << Student.new(age, name, parent_permission: parent_permission)
-
-  elsif option == 2
-    specilization = get_input('Specialization: ', String)
-    @list_person << Teacher.new(age, name, specilization)
-  end
-  puts 'Person successfuly created!'
-end
