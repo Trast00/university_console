@@ -11,5 +11,3 @@ class Book
     list_rental << rental unless list_rental.include?(rental)
   end
 end
-
-
