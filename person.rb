@@ -1,7 +1,7 @@
 require './Nameable'
 
 class Person < Nameable
-  attr_reader :id
+  attr_accessor :id
   attr_accessor :name, :age, :list_rental
 
   def initialize(age, name = 'Unknown', parent_permission: false)
@@ -23,6 +23,16 @@ class Person < Nameable
 
   def add_rental(rental)
     @list_rental << rental unless list_rental.include?(rental)
+  end
+
+  def to_json
+    {
+      id: @id,
+      age: @age,
+      name: @name,
+      parent_permission: @parent_permission,
+      list_rental: @list_rental
+    }
   end
 
   private

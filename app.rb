@@ -1,3 +1,4 @@
+require 'json'
 require './student'
 require './teacher'
 require './book'
@@ -7,6 +8,25 @@ class App
   def initialize
     @list_book = []
     @list_person = []
+    #load_data
+  end
+
+  def convert_data(data, type)
+    data = data.to_i if data.match?(/\A\d+\z/)
+    data = data.to_s if type == String
+    data
+  end
+  
+  def get_input(message, type, between_values = [])
+    data = ''
+    until data.is_a?(type) &&
+          (type == String ? !data.empty? : true) &&
+          (between_values.empty? || between_values.include?(data))
+      print message
+      data = gets.chomp
+      data = convert_data(data, type)
+    end
+    data
   end
 
   def show_list_book(with_index: false)
@@ -47,6 +67,8 @@ class App
 
     if option == 1
       parent_permission = get_input('Parent Persion [Y/N]: ', String, %w[Y N y n])
+      parent_permission = true if parent_permission == "Y" || parent_permission == "y"
+      parent_permission = false if parent_permission == "N" || parent_permission == "n"
       @list_person << Student.new(age, name, parent_permission: parent_permission)
 
     elsif option == 2
@@ -86,5 +108,37 @@ class App
     Rental.new(date, @list_person[person_index], @list_book[book_index])
 
     puts 'Rental successfully created'
+  end
+
+  def save_data
+    list_data = []
+    @list_person.each do |person|
+      list_data << person.to_json
+    end
+    File.write("./data/persons.json", JSON.generate(list_data), mode: "w")
+
+    list_data = []
+    @list_book.each do |book| 
+      list_data << book.to_json
+    end
+    File.write("./data/books.json", JSON.generate(list_data), mode: "w")
+
+  end
+
+  def load_data
+    file = File.open("./data/persons.json")
+    list_data = JSON.parse(file.readlines.join)
+    puts list_data
+    if !list_data.empty?
+      list_data.each do |data|
+        person = Person.new(data[:age], data[:name])
+        person.id = data[:id]
+        person.parent_permission = data[:parent_permission]
+        @list_person << person
+      end
+    end
+  
+    file.close
+    puts @list_person
   end
 end
