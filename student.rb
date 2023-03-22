@@ -19,6 +19,7 @@ class Student < Person
 
     new_classroom.list_student << self
     @classroom = new_classroom
+    @classroom
   end
 
   def to_json(*_args)
