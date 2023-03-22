@@ -14,8 +14,7 @@ class Book
   def to_json
     {
       title: @title,
-      author: @book.to_json,
-      list_rental: @list_rental
+      author: @author
     }
   end
 end

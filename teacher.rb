@@ -10,5 +10,12 @@ class Teacher < Person
     true
   end
 
+  def to_json
+    json = super
+    json["specialization"] = @specialization
+    json["type"] = "teacher"
+    json
+  end
+
   attr_accessor :specialization
 end

@@ -8,7 +8,6 @@ class App
   def initialize
     @list_book = []
     @list_person = []
-    #load_data
   end
 
   def convert_data(data, type)
@@ -110,35 +109,4 @@ class App
     puts 'Rental successfully created'
   end
 
-  def save_data
-    list_data = []
-    @list_person.each do |person|
-      list_data << person.to_json
-    end
-    File.write("./data/persons.json", JSON.generate(list_data), mode: "w")
-
-    list_data = []
-    @list_book.each do |book| 
-      list_data << book.to_json
-    end
-    File.write("./data/books.json", JSON.generate(list_data), mode: "w")
-
-  end
-
-  def load_data
-    file = File.open("./data/persons.json")
-    list_data = JSON.parse(file.readlines.join)
-    puts list_data
-    if !list_data.empty?
-      list_data.each do |data|
-        person = Person.new(data[:age], data[:name])
-        person.id = data[:id]
-        person.parent_permission = data[:parent_permission]
-        @list_person << person
-      end
-    end
-  
-    file.close
-    puts @list_person
-  end
 end

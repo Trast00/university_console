@@ -25,7 +25,6 @@ def main
     option = gets.chomp.to_i
     open_option(option)
   end
-  @app.save_data
   print 'Thank you for using this app!'
 end
 

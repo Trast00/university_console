@@ -20,4 +20,13 @@ class Student < Person
     new_classroom.list_student << self
     @classroom = new_classroom
   end
+
+  def to_json
+    json = super
+    json["classroom"] = @classroom
+    json["parent_permission"] = @parent_permission
+    json["type"] = "student"
+    json
+  end
+
 end

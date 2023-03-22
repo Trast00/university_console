@@ -14,8 +14,7 @@ class Rental
   def to_json
     {
       date: @date,
-      book: @book.to_json,
-      person: @person.to_json
+      book: @book.to_json
     }
   end
 end
