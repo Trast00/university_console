@@ -1,4 +1,4 @@
-require './Nameable'
+require './nameable'
 
 class Person < Nameable
   attr_accessor :id, :name, :age, :list_rental, :parent_permission
