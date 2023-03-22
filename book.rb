@@ -11,7 +11,7 @@ class Book
     list_rental << rental unless list_rental.include?(rental)
   end
 
-  def to_json
+  def to_json(*_args)
     {
       title: @title,
       author: @author

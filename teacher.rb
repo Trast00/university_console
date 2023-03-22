@@ -10,10 +10,10 @@ class Teacher < Person
     true
   end
 
-  def to_json
+  def to_json(*_args)
     json = super
-    json["specialization"] = @specialization
-    json["type"] = "teacher"
+    json['specialization'] = @specialization
+    json['type'] = 'teacher'
     json
   end
 
