@@ -1,8 +1,7 @@
 require './Nameable'
 
 class Person < Nameable
-  attr_accessor :id
-  attr_accessor :name, :age, :list_rental, :parent_permission
+  attr_accessor :id, :name, :age, :list_rental, :parent_permission
 
   def initialize(age, name = 'Unknown', parent_permission: false)
     @id = rand(999)
@@ -25,16 +24,11 @@ class Person < Nameable
     @list_rental << rental unless list_rental.include?(rental)
   end
 
-  def to_json
-    list_data = []
-    @list_rental.each do |rental|
-      list_data << rental.to_json()
-    end
+  def to_json(*_args)
     {
       id: @id,
       age: @age,
-      name: @name,
-      list_rental: list_data
+      name: @name
     }
   end
 
