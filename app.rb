@@ -8,6 +8,7 @@ class App
   def initialize
     @list_book = []
     @list_person = []
+    load_data
   end
 
   def convert_data(data, type)
@@ -15,7 +16,7 @@ class App
     data = data.to_s if type == String
     data
   end
-  
+
   def get_input(message, type, between_values = [])
     data = ''
     until data.is_a?(type) &&
@@ -66,8 +67,8 @@ class App
 
     if option == 1
       parent_permission = get_input('Parent Persion [Y/N]: ', String, %w[Y N y n])
-      parent_permission = true if parent_permission == "Y" || parent_permission == "y"
-      parent_permission = false if parent_permission == "N" || parent_permission == "n"
+      parent_permission = true if %w[Y y].include?(parent_permission)
+      parent_permission = false if %w[N n].include?(parent_permission)
       @list_person << Student.new(age, name, parent_permission: parent_permission)
 
     elsif option == 2
@@ -109,4 +110,72 @@ class App
     puts 'Rental successfully created'
   end
 
+  def save_data
+    list_data = []
+    @list_person.each do |person|
+      list_data << person.to_json
+    end
+    File.write('./data/persons.json', JSON.generate(list_data), mode: 'w')
+
+    list_data = []
+    @list_book.each do |book|
+      list_data << book.to_json
+    end
+    File.write('./data/books.json', JSON.generate(list_data), mode: 'w')
+  end
+
+  def load_rentals(list, person)
+    list_rental = []
+    list.each do |data|
+      book = Book.new(data['book']['title'], data['book']['author'])
+      rental = Rental.new(data['date'], person, book)
+      list_rental << rental
+    end
+    list_rental
+  end
+
+  def convert_data_person(data)
+    person = Student.new(data['age'], data['name'], data['classroom']) if data['type'] == 'student'
+    person = Teacher.new(data['age'], data['name'], data['specialization']) if data['type'] == 'teacher'
+    person.id = data['id']
+    person.parent_permission = data['parent_permission']
+    person.list_rental = load_rentals(data['list_rental'], person) if data['list_rental']
+    @list_person << person
+  end
+
+  def load_persons_data
+    return unless File.exist?('./data/persons.json') && !File.empty?('./data/persons.json')
+
+    file = File.open('./data/persons.json')
+    list_data = JSON.parse(file.read)
+
+    unless list_data.empty?
+      list_data.each do |data|
+        convert_data_person(data)
+      end
+    end
+
+    file.close
+  end
+
+  def load_book_data
+    return unless File.exist?('./data/books.json') && !File.empty?('./data/books.json')
+
+    file = File.open('./data/books.json')
+    list_data = JSON.parse(file.read)
+
+    unless list_data.empty?
+      list_data.each do |data|
+        book = Book.new(data['title'], data['author'])
+        @list_book << book
+      end
+    end
+
+    file.close
+  end
+
+  def load_data
+    load_persons_data
+    load_book_data
+  end
 end
