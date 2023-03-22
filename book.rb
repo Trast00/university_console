@@ -10,4 +10,11 @@ class Book
   def add_rental(rental)
     list_rental << rental unless list_rental.include?(rental)
   end
+
+  def to_json(*_args)
+    {
+      title: @title,
+      author: @author
+    }
+  end
 end
