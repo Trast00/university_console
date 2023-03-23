@@ -18,10 +18,10 @@ describe Rental do
       expect(@rental.book.title).to eq @book.title
     end
 
-    it "test to_json methods" do
-      expect(@rental.to_json[:date]).to eq @rental.date  
-      expect(@rental.to_json[:person]).to eq @rental.person.to_json  
-      expect(@rental.to_json[:book]).to eq @rental.book.to_json  
+    it 'test to_json methods' do
+      expect(@rental.to_json[:date]).to eq @rental.date
+      expect(@rental.to_json[:person]).to eq @rental.person.to_json
+      expect(@rental.to_json[:book]).to eq @rental.book.to_json
     end
   end
 end

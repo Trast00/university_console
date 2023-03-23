@@ -12,9 +12,9 @@ describe Book do
       expect(@book.title).to eq 'Lord of ring'
       expect(@book.author).to eq 'Tolkien'
     end
-    
-    it "test to_json methods" do
-      expect(@book.to_json[:title]).to eq @book.title  
+
+    it 'test to_json methods' do
+      expect(@book.to_json[:title]).to eq @book.title
       expect(@book.to_json[:author]).to eq @book.author
     end
   end

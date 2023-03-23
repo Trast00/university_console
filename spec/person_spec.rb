@@ -57,24 +57,22 @@ describe Person do
       @teacher = Teacher.new(17, 'doctor', 'time travel')
     end
 
-    it "test to_json methods on person" do
-      expect(@person.to_json[:id]).to eq @person.id  
+    it 'test to_json methods on person' do
+      expect(@person.to_json[:id]).to eq @person.id
       expect(@person.to_json[:age]).to eq @person.age
       expect(@person.to_json[:name]).to eq @person.name
     end
 
-    it "test to_json methods on student" do
-      expect(@student.to_json[:id]).to eq @student.id  
+    it 'test to_json methods on student' do
+      expect(@student.to_json[:id]).to eq @student.id
       expect(@student.to_json[:classroom]).to eq @student.classroom
       expect(@student.to_json[:type]).to eq 'student'
     end
 
-    it "test to_json methods on teacher" do
-      expect(@teacher.to_json[:id]).to eq @teacher.id  
+    it 'test to_json methods on teacher' do
+      expect(@teacher.to_json[:id]).to eq @teacher.id
       expect(@teacher.to_json[:specialization]).to eq @teacher.specialization
       expect(@teacher.to_json[:type]).to eq 'teacher'
     end
   end
-
-
 end
