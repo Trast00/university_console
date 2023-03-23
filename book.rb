@@ -8,7 +8,7 @@ class Book
   end
 
   def add_rental(rental)
-    list_rental << rental unless list_rental.include?(rental)
+    @list_rental << rental unless @list_rental.include?(rental)
   end
 
   def to_json(*_args)
